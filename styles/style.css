@@ -1,0 +1,97 @@
+label{
+    font-size: large;
+}
+
+.button{
+
+    background-color: navy;
+    color:white;
+    margin-top: 5%;
+    opacity: .6;
+    border-radius: 12%;
+    width:75px;
+    height:35px;
+    transition: width .1s;
+}
+
+.button:hover{
+
+    width: 80px;
+    height:40px;
+    opacity: 1;
+    cursor: pointer;
+}
+
+.theForm{
+    background-image: linear-gradient(to bottom right, green, blue);
+    margin:auto;
+    margin-top: 8%;
+    padding-top: 8%;
+    text-align: center;
+    width:300px;
+    height:200px;
+    color:whitesmoke;
+    border-radius: 6%;
+}
+body{
+    background-color: #F5F5F5;
+}
+
+.title
+{
+    margin:auto;
+    font-size:150px;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    background: -webkit-linear-gradient(green, blue);
+    text-align: center;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.wrap{
+    margin:auto;
+    flex-wrap: wrap;
+    max-width: 308px;
+    padding:10px;
+}
+
+#signUp{
+    background-image: linear-gradient(to bottom right, blue, #0492C2);
+    opacity: 1;
+    color: white;
+    margin: auto;
+    border-radius: 2%;
+    margin-top:10px;
+    margin-left:2%;
+    width:290px;
+    height:45px;
+}
+
+#signUp:hover{
+    opacity: .8;
+    cursor: pointer;
+}
+
+.playerList{
+    float: right;
+    border: 3px solid;
+    border-style: solid;
+    background-color:whitesmoke;
+    border-color: black;
+    overflow:auto;
+    width:100px;
+    height:200px;
+}
+
+.displayName{
+    border: 3px solid;
+    margin:auto;
+    border-color:red;
+    color:black;
+    
+}
+
+.onlineHeader{
+    border: 1px solid;
+    border-color: black;
+}
