@@ -13,16 +13,28 @@
 <head>
 <link rel="stylesheet" href="styles/style.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script type="text/javascript" src="/scripts/friendList.js"></script>
+<script type="text/javascript" src="/scripts/createOrJoin.js"></script>
 </head>
-<body>
+<body id="makes">
 <script>
-    allUser("<?php echo $_SESSION['jumpkey'];?>");
-</script>
-<?php echo '<button onClick="createSession(\''.$_SESSION['jumpkey'].'\');">Create</button><button>Join</button>';?>
-<div class='playerList' id="list">
-    <div class='onlineHeader'>Player Online</div>
+    // allUser("<?php echo $_SESSION['jumpkey'];?>");
 
+    function setup()
+    {
+        var makes = document.getElementById('makes');
+
+        makes.innerHTML = `<form class='theForm match' action='#'>
+        <label for='name'>Name of game match:</label>
+        <input text='text' id='gname' name='gname'><br>
+        <button class='button' onClick='createGameplay("<?php echo $_SESSION['jumpkey']?>");'>Create Match</button>
+        </form>`;
+    }
+</script>
+<div class="choiceWrap">
+<?php echo '<div><button class="choice" onClick="setup();">Create</button></div><div><button class="choice">Join</button></div>';?>
+
+
+<!-- onClick="createGameplay(\''.$_SESSION['jumpkey'].'\' -->
 </div>
 </body>
 

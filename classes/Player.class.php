@@ -25,9 +25,12 @@ class Player extends DB
         {
                 $hashed = $this->hashPass($pass);
 
-                $stmt = $this->conn->prepare("insert into player (username, password) values (:player, :pass)");
+                $token = $this->hashPass($pass+$player);
+
+                $stmt = $this->conn->prepare("insert into player (username, password, token) values (:player, :pass, :token)");
                 $stmt->bindParam(':player', $player);
                 $stmt->bindParam(':pass', $hashed);
+                $stmt->bindParam(':token', $token);
                 $insert = $stmt->execute();
 
                 if($insert > 0)

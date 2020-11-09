@@ -22,17 +22,74 @@ label{
     cursor: pointer;
 }
 
+.choice
+{
+    background-color: navy;
+    color:white;
+    margin-top: 5%;
+    opacity: .9;
+    border-radius: 12%;
+    width:150px;
+    height: 75px;
+}
+
+.choice:hover{
+    opacity: 1;
+    cursor: pointer;
+}
+
 .theForm{
     background-image: linear-gradient(to bottom right, green, blue);
     margin:auto;
     margin-top: 8%;
     padding-top: 8%;
     text-align: center;
+    padding: 2%;
     width:300px;
-    height:200px;
+    height:300px;
     color:whitesmoke;
     border-radius: 6%;
 }
+
+.theForm.chat{
+    float: right;
+}
+
+.theForm.match{
+    height: 150px;
+}
+
+
+.aim{
+    flex-wrap: wrap;
+}
+
+.theForm > .message{
+    background-color: whitesmoke;
+    margin:auto;
+    overflow:auto;
+    height: 200px;
+    margin-bottom: 6px;
+}
+
+.aim > button{
+
+    background-color: green;
+    color: whitesmoke;
+    width: 70px;
+    border-radius: 8%;
+}
+
+.aim > input{
+
+    margin:auto;
+    width:200px;
+}
+
+.theForm > .aim{
+
+}
+
 body{
     background-color: #F5F5F5;
 }
@@ -53,6 +110,12 @@ body{
     flex-wrap: wrap;
     max-width: 308px;
     padding:10px;
+}
+
+.choiceWrap{
+    margin:auto;
+    margin-top: 250px;
+    text-align: center;
 }
 
 #signUp{
