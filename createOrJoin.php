@@ -23,15 +23,44 @@
     {
         var makes = document.getElementById('makes');
 
-        makes.innerHTML = `<form class='theForm match' action='#'>
+        makes.innerHTML = `<div class='theForm match'>
         <label for='name'>Name of game match:</label>
         <input text='text' id='gname' name='gname'><br>
         <button class='button' onClick='createGameplay("<?php echo $_SESSION['jumpkey']?>");'>Create Match</button>
-        </form>`;
+        </div>`;
+    }
+
+    async function join()
+    {
+        var makes = document.getElementById('makes');
+
+       await $.post('/backend/gameplays.php',{op:'search'},function(data, status){
+            lobby = JSON.parse(data);
+            console.log(...lobby);
+
+            var lobby;
+       
+
+            if(lobby != null)
+            {
+                makes.innerHTML = `
+                <div class='theForm match'>
+                <h3 class='selection' onclick='call("${lobby[0].id}");'>${lobby[0].name}</h3>
+                </div>
+                `;
+            }
+        });
+
+        
+    }
+
+    function call(x)
+    {
+        console.log(x);
     }
 </script>
 <div class="choiceWrap">
-<?php echo '<div><button class="choice" onClick="setup();">Create</button></div><div><button class="choice">Join</button></div>';?>
+<?php echo '<div><button class="choice" onClick="setup();">Create</button></div><div><button class="choice" onclick="join();">Join</button></div>';?>
 
 
 <!-- onClick="createGameplay(\''.$_SESSION['jumpkey'].'\' -->

@@ -26,7 +26,7 @@ class Player extends DB
                 $hashed = $this->hashPass($pass);
 
                 $token = $this->hashPass($pass+$player);
-
+ 
                 $stmt = $this->conn->prepare("insert into player (username, password, token) values (:player, :pass, :token)");
                 $stmt->bindParam(':player', $player);
                 $stmt->bindParam(':pass', $hashed);

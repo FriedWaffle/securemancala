@@ -27,7 +27,6 @@ class Lobby extends DB
             {
                 $stmtSelect->execute();
             }
-            
 
             $row = $stmtSelect->fetch();
 
@@ -44,6 +43,28 @@ class Lobby extends DB
         catch(PDOException $e)
         {
             $this->conn->rollBack();
+            echo $e->getMessage();
+        }
+    }
+
+    function allLobbies()
+    {
+        try
+        {
+            $stmt = $this->conn->prepare("select * from lobby");
+            $stmt->execute();
+
+            $arr = array();
+            $i = 0;
+            while($row = $stmt->fetch())
+            {
+                $arr[$i] = array('id' => $row['id'], 'playeronego' => $row['playeronego'], 'playertwogo' => $row['playertwogo'], 'gostatus' => $row['gostatus'] , 'name' => $row['name']);
+            }
+
+            return $arr;
+        }
+        catch(PDOException $e)
+        {
             echo $e->getMessage();
         }
     }

@@ -65,11 +65,28 @@ label{
 }
 
 .theForm > .message{
-    background-color: whitesmoke;
+    background-color: #CCCCCC;
+
     margin:auto;
-    overflow:auto;
+    overflow: auto;
     height: 200px;
     margin-bottom: 6px;
+}
+
+.theForm > .message > .word{
+    color: black;
+    font: bold 12px "Lucida Grande", Sans-Serif; 
+    float: left;
+    text-align: left;
+    overflow: auto;
+    padding: 0;
+}
+
+span{
+    color:white;
+    background-color: black;
+
+    border-radius: 6%;
 }
 
 .aim > button{
@@ -78,6 +95,15 @@ label{
     color: whitesmoke;
     width: 70px;
     border-radius: 8%;
+}
+
+.selection{
+    background-color: whitesmoke;
+    color: black;
+}
+
+.selection:hover{
+    cursor: pointer;
 }
 
 .aim > input{
