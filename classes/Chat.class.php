@@ -9,7 +9,7 @@
            $Id = $this->retrieveId($name);
            try
            {
-                $stmt = $this->conn->prepare("select lobby_id from host where player_id = :id");
+                $stmt = $this->conn->prepare("select lobby_id from lobbyplayer where player_id = :id");
                 $stmt->bindParam(":id",$Id);
 
                 $stmtInsert = $this->conn->prepare("insert into chat(lobby_id) values(:lobby_id)");
@@ -27,8 +27,7 @@
 
                 if($status > 0)
                 {
-                    // $arr = array("lobby_id" => $row['lobby_id']);
-                    // return $arr;
+                    
                 }
                 else
                 {
@@ -39,11 +38,12 @@
 
             }catch(PDOException $e)
             {
-                $this->conn->rollBack();  
+                $this->conn->rollBack();
+                
             }
             finally{
 
-                $this->quickSelect($Id);
+               $this->quickSelect($Id);
             }
         }
 
@@ -91,33 +91,12 @@
             }
         }
 
-        function quickSelect($Id)
-        {
-            try
-            {
-                $stmt = $this->conn->prepare("select lobby_id from host where player_id = :player_id");
-                $stmt->bindParam(":player_id", $Id);
-                $stmt->execute();
-
-                $row = $stmt->fetch();
-
-                echo $row['lobby_id'];
-                // $arr = array("lobby_id" => $row['lobby_id']);
-
-                // return $arr;
-
-            }
-            catch(PDOException $e)
-            {
-                echo $e->getMessage();
-            }
-        }
-
         function read($lobby_id)
         {
             try
             {
-                $stmt = $this->conn->prepare("select player.username, message.chat_id, message.message, message.id from player join host on player.id = host.player_id join lobby on host.lobby_id = lobby.id join chat on lobby.id = chat.lobby_id join message on chat.id = message.chat_id where lobby.id = :id");
+                $stmt = $this->conn->prepare("select player.username, message.message from player inner join message on player.id = message.player_id inner join lobbyplayer on player.id = lobbyplayer.player_id inner join chat on lobbyplayer.lobby_id = chat.lobby_id order by message.id");
+                //$stmt = $this->conn->prepare("select player.username, message.chat_id, message.message, message.id from player join lobbyplayer on player.id = lobbyplayer.player_id join lobby on lobbyplayer.lobby_id = lobby.id join chat on lobby.id = chat.lobby_id join message on chat.id = message.chat_id where lobby.id = :id");
                 $stmt->bindParam(":id",$lobby_id);
                 $stmt->execute();
 

@@ -7,16 +7,19 @@
     switch($_POST['op'])
     {
         case 'create':
-           $myJson = json_encode($Gameplay->initialization($_POST['jumpJack'],$_POST['gn']));
+           $myJson = json_encode($Gameplay->initialization($_POST['jumpJack'],$_POST['gn'], $_POST['role']));
            echo $myJson;
         break;
         case 'search':
             $lobbyJson = json_encode($Gameplay->allLobbies());
             echo $lobbyJson;
         break;
-        // case 'delete':
-        //     $Gameplay->deleteGameplay($_POST['jumpJack']);
-        // break;
+        case 'join':
+            $Gameplay->joinLobby($_POST['luckyNum'], $_POST['jumpjack'],$_POST['role']);
+        break;
+        case 'find':
+            $Gameplay->quickSelect($_POST['luckyNum']);
+        break;
     }
     
 

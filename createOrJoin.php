@@ -23,8 +23,6 @@
     {
         var makes = document.getElementById('makes');
 
-        <?php $_SESSION['op'] = "create"; ?>
-
         makes.innerHTML = `<div class='theForm match'>
         <label for='name'>Name of game match:</label>
         <input text='text' id='gname' name='gname'><br>
@@ -47,7 +45,7 @@
             {
                 makes.innerHTML = `
                 <div class='theForm match'>
-                <h3 class='selection' onclick='joinLobby("${lobby[0].id}", "<?php $_SESSION['jumpkey']?>");'>${lobby[0].name}</h3>
+                <h3 class='selection' onclick='joinLobby("${lobby[0].id}", "<?php echo $_SESSION['jumpkey']?>");'>${lobby[0].name}</h3>
                 </div>
                 `;
             }
@@ -58,12 +56,12 @@
 
     function joinLobby(x,y)
     {
-        $.post('/backend/gameplays.php',{luckyNum:x,jumpjack:y, op:'join'}, function(data, status){
+        $.post('/backend/gameplays.php',{luckyNum:x,jumpjack:y, role:'second', op:'join'}, function(data, status){
             console.log(data);
 
             <?php $_SESSION['op'] = "join"; ?>
 
-            window.location.href = 'lobby.php';
+            //window.location.href = 'lobby.php';
         });
     }
 </script>

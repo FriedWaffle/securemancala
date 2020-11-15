@@ -4,7 +4,7 @@ include("PDO.DB.class.php");
 
 class Lobby extends DB
 {
-    function initialization($Name, $Gname)
+    function initialization($Name, $Gname, $role)
     {
         $Id = $this->retrieveId($Name);
 
@@ -17,7 +17,7 @@ class Lobby extends DB
             $stmtSelect->bindParam(':id',$Id);
             $stmtSelect->bindParam(':Gname', $Gname);
 
-            $stmtHost = $this->conn->prepare("insert into host (player_id, lobby_id) values (:playa, :lobbyist)");
+            $stmtHost = $this->conn->prepare("insert into lobbyplayer (player_id, lobby_id, role) values (:playa, :lobbyist, :role)");
 
             $this->conn->beginTransaction();
             
@@ -32,6 +32,7 @@ class Lobby extends DB
 
             $stmtHost->bindParam(":playa",$row['playa']);
             $stmtHost->bindParam(":lobbyist",$row['lobbyist']);
+            $stmtHost->bindParam(":role", $role);
             $stmtHost->execute();
 
             $this->conn->commit();
@@ -69,30 +70,32 @@ class Lobby extends DB
         }
     }
 
-    function joinLobby($lobbyId, $name)
+    function joinLobby($lobbyId, $name, $role)
+    {
+        $Id = $this->retrieveId($name);
+        try
         {
-            $Id = $this->retrieveId($name);
-            try
-            {
-                $stmt = $this->conn->prepare("insert into lobbyplayer(player_id, lobby_id) values (:player, :lobby)");
-                $stmt->bindParam(":player", $Id);
-                $stmt->bindParam(":lobby", $lobbyId);
-                $status = $stmt->execute();
+            $stmt = $this->conn->prepare("insert into lobbyplayer(player_id, lobby_id, role) values (:player, :lobby, :role)");
+            $stmt->bindParam(":player", $Id);
+            $stmt->bindParam(":lobby", $lobbyId);
+            $stmt->bindParam(":role", $role);
+            $status = $stmt->execute();
 
-                if($status > 0)
-                {
-                    echo "Success";
-                }
-                else
-                {
-                    echo "Failed";
-                }
-            }
-            catch(PDOException $e)
+            if($status > 0)
             {
-                echo $e->getMessage();
+                echo "Success";
+            }
+            else
+            {
+                echo "Failed";
             }
         }
+        catch(PDOException $e)
+        {
+            echo $Id;
+            //echo $e->getMessage();
+        }
+    }
 }
 
 ?>

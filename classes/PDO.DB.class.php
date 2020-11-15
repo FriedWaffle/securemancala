@@ -37,6 +37,25 @@
             }
         }
 
+        function quickSelect($Id)
+        {
+            try
+            {
+                $stmt = $this->conn->prepare("select lobby_id from lobbyplayer where player_id = :player_id");
+                $stmt->bindParam(":player_id", $Id);
+                $stmt->execute();
+
+                $row = $stmt->fetch();
+
+                echo $row['lobby_id'];
+
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+        }
+
         function hashPass($pass)
         {
             return $this->hashPass = hash('sha256', $pass);

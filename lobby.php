@@ -19,6 +19,9 @@
     <script>
 
         var lab;
+        var status = [];
+        status[0] = "create";
+        status[1] = "join";
 
         function loaded(){
 
@@ -45,24 +48,35 @@
 
             // window.addEventListener('beforeunload',function(e){
 
+                $.post('/backend/chats.php',{jumpjack:'<?php echo $_SESSION['jumpkey']; ?>', 
+                op:'create'}, 
+                function(data, status)
+                {
+                    console.log(data);
+                    lab = data;
+
+                });
             // $.post(
             //     '/backend/gameplays.php',
-            //     {jumpJack:'<?php echo $_SESSION['jumpkey']; ?>',op:'delete'},
+            //     {jumpJack:'<?php $_SESSION['jumpkey']; ?>',op:'delete'},
             //     function(data, status){
             //         console.log(data);
             //     });
             // });
 
-            $.post('/backend/chats.php',{jumpjack:'<?php echo $_SESSION['jumpkey']; ?>', 
-                op:'create'}, 
-            function(data, status)
-            {
-                console.log(data);
-                lab = data;
-                // lab = JSON.parse(data);
-                // console.log(lab);
-
-            });
+            // if("<?php $_SESSION['op'] ?>" == "create")
+            // {
+            //     console.log('I have made!');
+                
+            // }
+            // else if("<?php $_SESSION['op'] ?>" == "join")
+            // {
+            //     console.log("I have arrive!");
+            //     $.post('/backend/chats.php',{jumpjack:'<?php echo $_SESSION['jumpkey']; ?>', op:'find'}, function(data,status){
+            //         console.log(data);
+            //         lab = data;
+            //     });
+            // }
 
 
             setInterval(function()
@@ -74,12 +88,7 @@
                             var json = JSON.parse(data);
 
                             console.log(data);
-                            // var msgs;
                             
-                            // var div = document.createElement('div');
-                            // var p = document.createElement('p');
-                            // var b = document.createElement('br');
-
                             $div = $('<div></div>');
                             for(var k in json)
                             {
