@@ -68,6 +68,31 @@ class Lobby extends DB
             echo $e->getMessage();
         }
     }
+
+    function joinLobby($lobbyId, $name)
+        {
+            $Id = $this->retrieveId($name);
+            try
+            {
+                $stmt = $this->conn->prepare("insert into lobbyplayer(player_id, lobby_id) values (:player, :lobby)");
+                $stmt->bindParam(":player", $Id);
+                $stmt->bindParam(":lobby", $lobbyId);
+                $status = $stmt->execute();
+
+                if($status > 0)
+                {
+                    echo "Success";
+                }
+                else
+                {
+                    echo "Failed";
+                }
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+        }
 }
 
 ?>

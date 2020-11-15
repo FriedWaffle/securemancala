@@ -2,7 +2,7 @@
 
     session_start();
     
-    if(!isset($_SESSION['icecream']))
+    if(!isset($_SESSION['jumpkey']))
     {
         header("Location: index.php");
     }
@@ -22,6 +22,8 @@
     function setup()
     {
         var makes = document.getElementById('makes');
+
+        <?php $_SESSION['op'] = "create"; ?>
 
         makes.innerHTML = `<div class='theForm match'>
         <label for='name'>Name of game match:</label>
@@ -45,7 +47,7 @@
             {
                 makes.innerHTML = `
                 <div class='theForm match'>
-                <h3 class='selection' onclick='call("${lobby[0].id}");'>${lobby[0].name}</h3>
+                <h3 class='selection' onclick='joinLobby("${lobby[0].id}", "<?php $_SESSION['jumpkey']?>");'>${lobby[0].name}</h3>
                 </div>
                 `;
             }
@@ -54,9 +56,15 @@
         
     }
 
-    function call(x)
+    function joinLobby(x,y)
     {
-        console.log(x);
+        $.post('/backend/gameplays.php',{luckyNum:x,jumpjack:y, op:'join'}, function(data, status){
+            console.log(data);
+
+            <?php $_SESSION['op'] = "join"; ?>
+
+            window.location.href = 'lobby.php';
+        });
     }
 </script>
 <div class="choiceWrap">

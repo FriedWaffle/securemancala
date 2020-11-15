@@ -1,4 +1,6 @@
-
+var status = [];
+status[0] = "create";
+status[1] = "join";
 
 function send(x)
 {

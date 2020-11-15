@@ -12,7 +12,7 @@
             if($player->checkLogIn($_POST['user'], $_POST['pass']))
             {
                 $_SESSION['icecream'] = $player->hashPass($_POST['user'] +""+$_POST['pass']);
-
+                  
                 $_SESSION['jumpkey'] = $_POST['user'];
 
                 if(isset($_SESSION['icecream']))

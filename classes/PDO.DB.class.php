@@ -8,12 +8,13 @@
         {
             try
             {
-                //$this->conn = new PDO("mysql:host={$_SERVER['DB_SERVER']};dbname={$_SERVER['DB']}", $_SERVER['DB_USER'], $_SERVER['DB_PASSWORD']);
-                $this->conn = new PDO("mysql:host=localhost;dbname=turnbase;",'joel','Dare7devil');
+                //$this->conn = new PDO("mysql:host={$_SERVER['DB_SERVER']};dbname={$_SERVER['DB']};", $_SERVER['DB_USER'], $_SERVER['DB_PASSWORD']);
+                $this->conn = new PDO("mysql:host=localhost;dbname=turnbase;",'friedicecream','Campbell3%emilia');
                 $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             }
             catch(PDOException $e)
             {
+                echo $_SERVER['DB_SERVER'];
                 echo "Connection failed: ".$e->getMessage();
             }
         }
