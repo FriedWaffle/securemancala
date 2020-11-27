@@ -3,7 +3,7 @@ define('HOST_NAME',"localhost");
 define('PORT',"8090");
 $null = NULL;
 
-require "./chathandler.php";
+require "../backend/chathandler.php";
 $chatHandler = new ChatHandler();
 
 $socketResource = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
@@ -21,12 +21,12 @@ while (true) {
 		$clientSocketArray[] = $newSocket;
 		
 		$header = socket_read($newSocket, 1024);
-		$chatHandler->doHandshake($header, $newSocket, HOST_NAME, PORT);
+		$chatHandler->doHandshake($header, $newSocket, "192.168.50.50", "98");
 		
 		socket_getpeername($newSocket, $client_ip_address);
-		$connectionACK = $chatHandler->newConnectionACK($client_ip_address);
+		//$connectionACK = $chatHandler->newConnectionACK($client_ip_address);
 		
-		$chatHandler->send($connectionACK);
+		//$chatHandler->send($connectionACK);
 		
 		$newSocketIndex = array_search($socketResource, $newSocketArray);
 		unset($newSocketArray[$newSocketIndex]);
@@ -37,7 +37,7 @@ while (true) {
 			$socketMessage = $chatHandler->unseal($socketData);
 			$messageObj = json_decode($socketMessage);
 			
-			$chat_box_message = $chatHandler->createChatBoxMessage($messageObj->chat_user, $messageObj->chat_message);
+			$chat_box_message = $chatHandler->createChatBoxMessage($messageObj->username, $messageObj->message);
 			$chatHandler->send($chat_box_message);
 			break 2;
 		}

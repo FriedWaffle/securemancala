@@ -1,7 +1,6 @@
 <?php
 
     require_once "classes/Player.class.php";
-  // phpinfo();
     
     session_start();
 

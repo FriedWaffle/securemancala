@@ -10,10 +10,11 @@
 
         while(true)
         {
+            sleep(2);
             $serverSocketArray = $socket->client;
-            socket_select($newSocketArray, $null, $null, 0, 10);
+            socket_select($serverSocketArray, $null, $null, 0, 10);
 
-            if(in_array($socket->server, $newSocketArray))
+            if(in_array($socket->server, $serverSocketArray))
             {
                 $newSocket = socket_accept($socket->server);
                 $clientSocketArray[] = $newSocket;
@@ -22,14 +23,13 @@
 
                 $socket->handshakes($request, $newSocket, "192.168.50.50", 8000);
 
-                socket_getpeername($newSocket, "192.168.50.50");
 
-                $newSocketIndex = array_search($socket->server, $newSocketArray);
-                unset($newSocketArray[$newSocketIndex]);
+                $newSocketIndex = array_search($socket->server, $serverSocketArray);
+                unset($serverSocketArray[$newSocketIndex]);
 
             }
 
-            foreach($newSocketArray as $newSocketArrayResource)
+            foreach($serverSocketArray as $newSocketArrayResource)
             {
                 while(socket_recv($newSocketArrayResource, $socketData, 5000, 0) >=1){
                     $socketMsg = $socketData;
@@ -42,15 +42,16 @@
                     
                 }
             }
-            $content= "Thanks!";
-            $response = chr(129) . chr(strlen($content)) . $content;
-                
-            socket_write($socket->client, $response);
 
-            // if(in_array($socketResource, $newSocketArray)){
-            //     $newSocket = socket_accept($socketResource);
-            //     $incomingSocketArray[] = $newSocket;
+            $socketData = @socket_read($newSocketArrayResource, 1024, PHP_NORMAL_READ);
+            if($socketData == false)
+            {
+                echo "Skip";
+            }
+
+            // $content= "Thanks!";
+            // $response = chr(129) . chr(strlen($content)) . $content;
                 
-            // }
+            // socket_write($socket->client, $response);
         }
 ?>

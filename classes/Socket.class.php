@@ -36,7 +36,7 @@
             "Upgrade: websocket\r\n" .
             "Connection: Upgrade\r\n" .
             "WebSocket-Origin: $host_name\r\n" .
-            "WebSocket-Location: ws://$host_name:$port\r\n".
+            "WebSocket-Location: ws://$host:$port/demo/shout.php\r\n".
             "Sec-WebSocket-Accept:$secAccept\r\n\r\n";
             socket_write($newSocket,$buffer,strlen($buffer));
         }
@@ -55,6 +55,41 @@
             return true;
         }
 
+        function unseal($socketData){
+            $length = ord($socketData[1]) & 127;
+            if($length == 126){
+                $masks = substr($socketData, 10, 4);
+                $data = substr($socketData, 8);
+            }
+            elseif($length == 127){
+                $masks = substr($socketData, 10, 4);
+                $data = substr($socketData, 14);
+            }
+            else{
+                $masks = substr($socketData, 2, 4);
+                $data = substr($socketData, 6);
+            }
+            $socketData = "";
+            for($i = 0; $i < strlen($data); ++$i){
+                $socketData .= $data[$i] ^ $masks[$i%4];
+            }
+
+            return $socketData;
+        }
+
+        function seal($socketData){
+            $b1 = 0x80 | (0x1 & 0x0f);
+            $length = strlen($socketData);
+
+            if($length <= 125)
+			$header = pack('CC', $b1, $length);
+            elseif($length > 125 && $length < 65536)
+                $header = pack('CCn', $b1, 126, $length);
+            elseif($length >= 65536)
+                $header = pack('CCNN', $b1, 127, $length);
+            return $header.$socketData;
+        }
+
         function handshake()
         {
             preg_match('#Sec-WebSocket-Key: (.*)\r\n#', $request, $matches);
@@ -66,6 +101,7 @@
             $this->headers .= "Upgrade: websocket\r\n";
             $this->headers .= "Connection: Upgrade\r\n";
             $this->headers .= "Sec-WebSocket-Version: 13\r\n";
+            $this->headers .= "WebSocket-Location: ws://$host_name:$port/demo/shout.php\r\n";
             $this->headers .= "Sec-WebSocket-Accept: $key\r\n\r\n";
             socket_write($this->client, $this->headers, strlen($this->headers));
         }

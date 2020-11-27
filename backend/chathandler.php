@@ -64,7 +64,7 @@ class ChatHandler {
 		"Upgrade: websocket\r\n" .
 		"Connection: Upgrade\r\n" .
 		"WebSocket-Origin: $host_name\r\n" .
-		"WebSocket-Location: ws://$host_name:$port/demo/shout.php\r\n".
+		"WebSocket-Location: ws://$host_name:$port/callsocket.php\r\n".
 		"Sec-WebSocket-Accept:$secAccept\r\n\r\n";
 		socket_write($client_socket_resource,$buffer,strlen($buffer));
 	}
@@ -84,8 +84,8 @@ class ChatHandler {
 		return $ACK;
 	}
 	
-	function createChatBoxMessage($chat_user,$chat_box_message) {
-		$message = $chat_user . ": <div><p>" . $chat_box_message . "</p></div>";
+	function createChatBoxMessage($user,$message) {
+		$message = $user . ": <div><p>" . $message . "</p></div>";
 		$messageArray = array('message'=>$message,'message_type'=>'chat-box-html');
 		$chatMessage = $this->seal(json_encode($messageArray));
 		return $chatMessage;
