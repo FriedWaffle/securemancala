@@ -1,2 +1,83 @@
-#name-area                      { position: absolute; top: 12px; right: 0; color: white; font: bold 12px "Lucida Grande", Sans-Serif; text-align: right; }   
-#name-area span                 { color: #fa9f00; }
+body {
+    margin: 0 auto;
+    padding: 0;
+  }
+  
+  .container {
+    border: 2px solid #dedede;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+  }
+  
+  .darker {
+    border-color: #ccc;
+    background-color: #c4c4c4;
+  }
+  
+  .container::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  
+  .container img {
+    float: left;
+    max-width: 60px;
+    width: 100%;
+    margin-right: 20px;
+    border-radius: 50%;
+  }
+  
+  .container img.right {
+    float: right;
+    margin-left: 20px;
+    margin-right:0;
+  }
+  
+  .time-right {
+    float: right;
+    color: #aaa;
+  }
+  
+  .time-left {
+    float: left;
+    color: #999;
+  }
+  
+  .wrap{
+      float:right;
+      height:400px;
+      width:400px;
+      width:fit-content;
+      border: 8px;
+      background: -webkit-linear-gradient(green, blue);
+      border-color:transparent;
+      border-style: solid;
+      border-radius: 3px;
+  }
+
+  #msg{
+      height:370px;
+      width:400px;
+      overflow: auto;
+  }
+
+  .btnSend{
+    float: right;
+    max-width: 60px;
+    width: 100%;
+    margin-right: 20px;
+    border-radius: 5%;
+  }
+
+  #messages{
+      width: 300px;
+
+  }
+
+  .wrap .message > .word{
+    
+    padding: 0;
+}

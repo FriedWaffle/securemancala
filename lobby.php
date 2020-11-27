@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="styles/style.css">
+        <link rel="stylesheet" href="styles/aim.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script type="text/javascript" src="/scripts/chat.js"></script>
     </head>
@@ -25,16 +25,25 @@
 
         function loaded(){
 
-            document.body.innerHTML = `<div class="theForm chat">
-                <div class="message">
-                <div class="word" id="msg">
+            // document.body.innerHTML = `<div class="theForm chat">
+            //     <div class="message">
+            //     <div class="word" id="msg">
                 
-                </div>
-                </div>
-                <div class="aim">
-                <input type="text" maxlength="250" id="messages" name="message" placeholder="Enter your message here...">
-                <button onclick="send(\'<?php echo $_SESSION['jumpkey']; ?>\');">Send</button>
-                </div>
+            //     </div>
+            //     </div>
+            //     <div class="aim">
+            //     <input type="text" maxlength="250" id="messages" name="message" placeholder="Enter your message here...">
+            //     <button onclick="send(\'<?php echo $_SESSION['jumpkey']; ?>\');">Send</button>
+            //     </div>
+            // </div>`;
+
+            document.body.innerHTML = `<div class="wrap">
+            <div class="word" id="msg">
+            </div>
+            <div class="aim">
+                 <input type="text" maxlength="250" id="messages" name="message" placeholder="Enter your message here...">
+                 <button class="btnSend" onclick="send(\'<?php echo $_SESSION['jumpkey']; ?>\');">Send</button>
+            </div>
             </div>`;
             
             
@@ -78,6 +87,7 @@
             //     });
             // }
 
+            var i = 1;
 
             setInterval(function()
             {
@@ -89,13 +99,23 @@
 
                             console.log(data);
                             
-                            $div = $('<div></div>');
-                            for(var k in json)
-                            {
-                                $div.append('<p><span>'+json[k].player+'</span>: '+json[k].msg+'</p>');
-                            }
-                           
-                            document.getElementById('msg').innerHTML = $div.html();
+                                $div = $('<div></div>');
+                                
+                                for(var k in json)
+                                {
+                                    if( '<?php echo $_SESSION['jumpkey']; ?>' == json[k].player)
+                                    {
+                                        $div.append('<div class="container"><a>'+json[k].player+'</a><p>'+json[k].msg+'</p></div>');
+                                    }
+                                    else
+                                    {
+                                        $div.append('<div class="container darker"><a>'+json[k].player+'</a><p>'+json[k].msg+'</p></div>');
+                                    }
+                                    
+                                }
+
+                                document.getElementById('msg').innerHTML = $div.html();
+
 
                         });
                 }
