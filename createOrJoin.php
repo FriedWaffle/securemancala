@@ -61,7 +61,7 @@
 
             <?php $_SESSION['op'] = "join"; ?>
 
-            //window.location.href = 'lobby.php';
+            window.location.href = 'lobby.php';
         });
     }
 </script>
