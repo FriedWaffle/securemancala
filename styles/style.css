@@ -73,11 +73,8 @@ label{
     margin-bottom: 6px;
 }
 
-.theForm > .message > .word{
-    color: black;
-    font: bold 12px "Lucida Grande", Sans-Serif; 
-    float: left;
-    text-align: left;
+.theForm > 
+.wrap .message > .word{
     overflow: auto;
     padding: 0;
 }
