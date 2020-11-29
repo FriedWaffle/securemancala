@@ -19,7 +19,17 @@ function enableControl(x)
     }
 }
 
-function displaySlot()
+function displaySlot(slotNums, slots, selected)
 {
-    
+
+    console.log(slotNums.length);
+    while(selected < slotNums.length)
+    {
+        console.log(`Selected: ${selected} Index at: `+slots[selected].childNodes.length);
+
+        console.log(`Checking for the ID: ${document.getElementById(`slot-${selected}`).innerHTML}`);
+
+        //document.getElementById(`slot-${selected}`).innerHTML = slots[selected].childNodes.length;
+        selected++;
+    }
 }

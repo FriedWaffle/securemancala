@@ -68,8 +68,22 @@ function interactiveboard()
     <rect x='4005.44' y='1018.04' class='rect' width='276.56' height='411.96'/>
     <text transform='matrix(1 0 0 1 3925.4448 1373.0327)' id='rScore' class='st3 st4'>0</text>
     <rect x='1465.19' y='136' class='rect' width='1884.12' height='434.58'/>
-    <text transform='matrix(1 0 0 1 1465.1924 348.9976)' class='st3 st5'>Player Two</text>
-    <text transform='matrix(1 0 0 1 1465.4946 2269.5615)' class='st3 st5'>Player One</text>
+    <text transform="matrix(1 0 0 1 0 221.8269)" class='st3 st5'>Player Two</text>
+    <text transform="matrix(1 0 0 1 53.3799 2482.8799)" class='st3 st5'>Player One</text>
    
+    <g id='slotNumber'>
+        <text id='slot-0' transform="matrix(1 0 0 1 982.8441 388.4091)" class="st6">4</text>
+        <text id='slot-1' transform="matrix(1 0 0 1 982.8439 2189.3088)" class="st6">4</text>
+        <text id='slot-2' transform="matrix(1 0 0 1 1465.1901 2189.3091)" class="st6">4</text>
+        <text id='slot-3' transform="matrix(1 0 0 1 1980.5901 2189.3096)" class="st6">4</text>
+        <text id='slot-4' transform="matrix(1 0 0 1 2516.0366 2189.3088)" class="st6">4</text>
+        <text id='slot-5' transform="matrix(1 0 0 1 3039.2681 2189.3091)" class="st6">4</text>
+        <text id='slot-6' transform="matrix(1 0 0 1 3548.479 2189.3101)" class="st6">4</text>
+        <text id='slot-7' transform="matrix(1 0 0 1 1500.6235 388.4088)" class="st6">4</text>
+        <text id='slot-8' transform="matrix(1 0 0 1 1980.59 388.4089)" class="st6">4</text>
+        <text id='slot-9' transform="matrix(1 0 0 1 2516.0364 388.4093)" class="st6">4</text>
+        <text id='slot-10' transform="matrix(1 0 0 1 3034.2678 388.4089)" class="st6">4</text>
+        <text id='slot-11' transform="matrix(1 0 0 1 3543.479 388.4095)" class="st6">4</text>
+    </g>
    </svg>`;
 }

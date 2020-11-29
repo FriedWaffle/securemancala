@@ -46,6 +46,9 @@ var gameBoard = (function()
                         console.log($$$('slot')[s].innerHTML='');
                     }
 
+                    enableControl($('first').getElementsByClassName('st2'));
+                    
+
                     init();
                 }
                 
@@ -89,7 +92,7 @@ var gameBoard = (function()
                        
                         let currentIndex = e.path[0].id;
                         console.log(currentIndex);
-                        var test = $$$('slot')[e.path[0]];
+                        // console.log('Selected: '+currentIndex);
                         var num = $$$('slot')[e.path[0].id].childNodes.length;
                         console.log(num);
                         
@@ -174,6 +177,12 @@ var gameBoard = (function()
                                 turn = waitTurn();
                                 console.log(turn);
                             }
+
+                            // console.log('Number left: '+$$$('slot')[e.path[0].id].childNodes.length);
+
+                            console.log($('slotNumber').getElementsByClassName('st6').length);
+
+                            displaySlot($('slotNumber').getElementsByClassName('st6'),$$$('slot'),e.path[0].id);
                     }
                 }
                 
@@ -181,7 +190,7 @@ var gameBoard = (function()
                 {
                     rightScore = 0;
                     leftScore = 0;
-                    
+                    disableControl($('second').getElementsByClassName('st2'));
                     
                     $('lScore').innerHTML = 0;
                     $('rScore').innerHTML = 0;
