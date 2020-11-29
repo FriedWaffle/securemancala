@@ -1,7 +1,7 @@
 <?php
 
     require_once "classes/Player.class.php";
-    
+
     session_start();
 
     $player = new Player();
