@@ -57,9 +57,38 @@ class Lobby extends DB
 
             $arr = array();
             $i = 0;
+
             while($row = $stmt->fetch())
             {
                 $arr[$i] = array('id' => $row['id'], 'playeronego' => $row['playeronego'], 'playertwogo' => $row['playertwogo'], 'gostatus' => $row['gostatus'] , 'name' => $row['name']);
+
+                $i++;
+            }
+
+            return $arr;
+        }
+        catch(PDOException $e)
+        {
+            echo $e->getMessage();
+        }
+    }
+
+    function findLobbyPlayers($lobby_id)
+    {
+        try
+        {
+            $stmt = $this->conn->prepare("select lobbyplayer.player_id as 'playerId', lobbyplayer.role as 'roles', player.username as 'user' from lobbyplayer join player on lobbyplayer.player_id = player.id where lobby_id = :lobbyId");
+            $stmt->bindParam(':lobbyId',$lobby_id);
+            $stmt->execute();
+
+            $arr = array();
+            $i = 0;
+
+            while($row = $stmt->fetch())
+            {
+                $arr[$i] = array('player_id' => $row['playerId'], 'role' => $row['roles'], 'username' => $row['user']);
+
+                $i++;
             }
 
             return $arr;
@@ -94,6 +123,34 @@ class Lobby extends DB
         {
             echo $Id;
             //echo $e->getMessage();
+        }
+    }
+
+    function getReady($name, $lobby_Id, $ready)
+    {
+        $Id = $this->retrieveId($name);
+
+        try
+        {
+            $stmt = $this->conn->prepare("update lobbyplayer set ready = :ready where lobby_id = :lobbyId and player_id = :playerId");
+            $stmt->bindParam(':ready', $ready);
+            $stmt->bindParam(':lobbyId', $lobby_Id);
+            $stmt->bindParam(':playerId', $Id);
+
+            $update = $stmt->execute();
+
+            if($update > 0)
+            {
+                echo "Success";
+            }
+            else
+            {
+                echo "Fail";
+            }
+        }
+        catch(PDOException $e)
+        {
+            echo $e->getMessage();
         }
     }
 }

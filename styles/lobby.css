@@ -1,4 +1,11 @@
 .grid-container{
     display:grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: auto 420px;
+}
+
+.button{
+    background-color: red;
+    color:whitesmoke;
+    border-radius: 2%;
+    border:0px;
 }

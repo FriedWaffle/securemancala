@@ -20,7 +20,13 @@
         case 'find':
             $Gameplay->quickSelect($_POST['luckyNum']);
         break;
+        case 'players':
+           $myJson = json_encode($Gameplay->findLobbyPlayers($_POST['luckyNum']));
+           echo $myJson;
+        break;
+        case 'ready':
+            $Gameplay->getReady($_POST['jumpjack'], $_POST['luckyNum'], $_POST['go']);
+        break;
     }
-    
 
 ?>

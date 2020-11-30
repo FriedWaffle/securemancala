@@ -1,36 +1,16 @@
 var lab;
 var status = [];
-status[0] = "create";
-status[1] = "join";
+
 
 function aim(play){
 
-    $('#grids').append(`<div class="wrap">
-    <div class="word" id="msg">
-    </div>
-    <div class="aim">
-         <input type="text" maxlength="250" id="messages" name="message" placeholder="Enter your message here...">
-         <button class="btnSend" onclick="send(${play});">Send</button>
-    </div>
-    </div>`);
-    
-   
-    
+    lobby(play);
     document.addEventListener("keyup",function(event){
         if(event.keyCode === 13)
         {
             send(play);
         }
     });
-
-        $.post('/backend/chats.php',{jumpjack:play, 
-        op:'create'}, 
-        function(data, status)
-        {
-            console.log(data);
-            lab = data;
-
-        });
 
     //to delay the chat to avoid piling up the request's queue or breaking it rhytem
     const delayChat = deplayMs => new Promise((resolve) =>{
@@ -55,6 +35,7 @@ function aim(play){
                             if( play == json[k].player)
                             {
                                 $div.append('<div class="container"><a>'+json[k].player+'</a><p>'+json[k].msg+'</p></div>');
+                                
                             }
                             else
                             {
@@ -64,10 +45,25 @@ function aim(play){
                         }
 
                         document.getElementById('msg').innerHTML = $div.html();
+
                 });
         }
 
-     await delayChat(1000);
+     await delayChat(2000);
     }, 1000);
+}
+
+
+
+
+function send(x)
+{
+    $.post('/backend/chats.php',{jumpjack:x,msg:document.getElementById('messages').value,luckyNum:lab,op:'send'},
+    function(data, status)
+    {
+        document.getElementById('messages').value = "";
+        console.log(data);
+    });
+
 }
 

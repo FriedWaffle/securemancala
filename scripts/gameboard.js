@@ -4,29 +4,25 @@ var gameBoard = (function()
                 var rightScore = 0;
                 var turn = 'first';
 
+                function $(id) {
+                    return document.getElementById(id);
+                }
                 
+                function $$(tag) {
+                    return document.getElementsByTagName(tag);
+                }
+                
+                function $$$(aClass)
+                {
+                    return document.getElementsByClassName(aClass);
+                }
                 
                 var svgns = "http://www.w3.org/2000/svg";
                 function randomize(min, max){
                     max -= min;
                     return parseInt(Math.random() * max) + min;
                 }
-
-                function $(id) {
-                    return document.getElementById(id);
-                }
-
-                function $$(tag) {
-                    return document.getElementsByTagName(tag);
-                }
-
-                function $$$(aClass)
-                {
-                    return document.getElementsByClassName(aClass);
-                }
-
                 
-
                 function makeCircle(x, y, index)
                 {
                     let cir = document.createElementNS(svgns, 'circle');

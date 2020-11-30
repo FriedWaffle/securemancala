@@ -4,12 +4,12 @@
     <meta charset='utf-8'/>
     <link href="styles/game.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    
     <script src='/scripts/gameboard.js'></script>
     <script src='/scripts/interactiveboard.js'></script>
     <script src='/scripts/controller.js'></script>
+    <script src='/scripts/aim.js'></script>
     <style>
-        #imgOne{
+        /* #imgOne{
     position:absolute;
     top:80px;
     right:60px;
@@ -55,7 +55,7 @@
 .st2:hover{
     fill:'white';
     opacity:.7;
-}
+} */
     </style>
     </head>
     <body>
