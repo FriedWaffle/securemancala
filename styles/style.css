@@ -95,6 +95,14 @@ span{
     cursor: pointer;
 }
 
+.select{
+    color:whitesmoke;
+}
+
+.select:hover{
+    cursor:pointer;
+}
+
 
 
 .title

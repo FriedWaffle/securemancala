@@ -23,8 +23,6 @@ function lobby(play){
 
             window.localStorage.setItem('lab',lab);
             
-            
-
             aim(play);
 
         }).done( 

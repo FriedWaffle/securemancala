@@ -14,6 +14,7 @@ function interactiveboard()
             <g class='slot'></g>
             <g class='slot'></g>
             <g class='slot'></g>
+            
             <g class='slot'></g>
             <g class='slot'></g>
             <g class='slot'></g>

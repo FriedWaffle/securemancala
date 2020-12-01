@@ -17,6 +17,7 @@
 </head>
 <body id="makes">
 <script>
+    window.localStorage.clear();
     // allUser("<?php echo $_SESSION['jumpkey'];?>");
 
     
@@ -35,30 +36,42 @@
     async function join()
     {
         var makes = document.getElementById('makes');
-
-       await $.post('/backend/lobbies.php',{op:'search'},function(data, status){
+        
+        await setInterval(() => {
+            
+            $.post('/backend/lobbies.php',{op:'search'},function(data, status){
             lobby = JSON.parse(data);
             console.log(...lobby);
 
             var lobby;
-       
 
             if(lobby != null)
             {
-                makes.innerHTML = `
-                <div class='theForm match'>
-                <h3 class='selection' onclick='joinLobby("${lobby[0].id}", "<?php echo $_SESSION['jumpkey']?>");'>${lobby[0].name}</h3>
-                </div>
-                `;
+                $div = $("<div></div>");
+
+                for(var l in lobby)
+                {
+                    if(lobby[l].cap != 2)
+                    {
+                        $div.append(`<div class='theForm match'><h3 class='selection' onclick='joinLobby("${lobby[l].id}", "<?php echo $_SESSION['jumpkey']?>");'>${lobby[l].name}</h3></div>`);
+                    }
+                    
+                }
+
+                makes.innerHTML = $div.html();
             }
         });
+
+        }, 2000);
+
+       
 
         
     }
 
     function joinLobby(x,y)
     {
-        $.post('/backend/lobbies.php',{luckyNum:x,jumpjack:y, role:'second', op:'join'}, function(data, status){
+        $.post('/backend/lobbies.php',{luckyNum:x,jumpjack:y, role:'second', op:'join',cap:2}, function(data, status){
             console.log(data);
 
             <?php $_SESSION['op'] = "join"; ?>

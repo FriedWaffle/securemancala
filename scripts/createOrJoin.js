@@ -7,7 +7,7 @@ function createGameplay(x)
     {
         $.post(
             '/backend/lobbies.php',
-            {jumpJack:x,gn:document.getElementById('gname').value, role:'first',op:'create'},
+            {jumpJack:x,gn:document.getElementById('gname').value, role:'first',op:'create', cap:1},
             function(data, status)
             {
                 console.log(data);

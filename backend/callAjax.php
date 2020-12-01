@@ -6,10 +6,6 @@
     
     $DB = new DB();
 
-    
-
-    
-
     switch($_POST['session'])
     {
         case 'create':

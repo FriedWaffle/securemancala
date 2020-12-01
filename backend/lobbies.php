@@ -7,7 +7,7 @@
     switch($_POST['op'])
     {
         case 'create':
-           $myJson = json_encode($Lobby->initialization($_POST['jumpJack'],$_POST['gn'], $_POST['role']));
+           $myJson = json_encode($Lobby->initialization($_POST['jumpJack'],$_POST['gn'], $_POST['role'], $_POST['cap']));
            echo $myJson;
         break;
         case 'search':
@@ -15,7 +15,7 @@
             echo $lobbyJson;
         break;
         case 'join':
-            $Lobby->joinLobby($_POST['luckyNum'], $_POST['jumpjack'],$_POST['role']);
+            $Lobby->joinLobby($_POST['luckyNum'], $_POST['jumpjack'],$_POST['role'], $_POST['cap']);
         break;
         case 'find':
             $Lobby->quickSelect($_POST['luckyNum']);

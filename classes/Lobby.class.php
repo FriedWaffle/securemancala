@@ -4,14 +4,15 @@ include("PDO.DB.class.php");
 
 class Lobby extends DB
 {
-    function initialization($Name, $Gname, $role)
+    function initialization($Name, $Gname, $role, $cap)
     {
         $Id = $this->retrieveId($Name);
 
         try
         {
-            $stmt = $this->conn->prepare("insert into lobby (name) values (:Gname)");
+            $stmt = $this->conn->prepare("insert into lobby (name, cap) values (:Gname, :cap)");
             $stmt->bindParam(":Gname",$Gname);
+            $stmt->bindParam(":cap",$cap);
 
             $stmtSelect = $this->conn->prepare("select player.id as 'playa', lobby.id as 'lobbyist' from player, lobby where player.id = :id and lobby.name = :Gname");
             $stmtSelect->bindParam(':id',$Id);
@@ -60,7 +61,7 @@ class Lobby extends DB
 
             while($row = $stmt->fetch())
             {
-                $arr[$i] = array('id' => $row['id'], 'playeronego' => $row['playeronego'], 'playertwogo' => $row['playertwogo'], 'gostatus' => $row['gostatus'] , 'name' => $row['name']);
+                $arr[$i] = array('id' => $row['id'], 'playeronego' => $row['playeronego'], 'playertwogo' => $row['playertwogo'], 'gostatus' => $row['gostatus'] , 'name' => $row['name'], 'cap'=> $row['cap']);
 
                 $i++;
             }
@@ -99,7 +100,7 @@ class Lobby extends DB
         }
     }
 
-    function joinLobby($lobbyId, $name, $role)
+    function joinLobby($lobbyId, $name, $role, $cap)
     {
         $Id = $this->retrieveId($name);
         try

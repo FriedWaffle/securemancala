@@ -38,6 +38,73 @@ var gameBoard = (function()
 
                 }
 
+                async function updateSlots()
+                {
+                var slots = $(`.slot`);
+                // console.log(slots);
+
+                    var slotArr = [];
+                    var i = 0;
+
+                    var right = 0;
+
+                    var left = 11;
+
+                    while(i < slots.length)
+                    {
+                        while(right < 6)
+                        {
+                            //console.log('Slot number: '+i+' Amount: '+slots[right].childNodes.length);
+                            slotArr[i] = slots[right].childNodes.length;
+                            right++;
+                            i++;
+                        }
+                
+                        while(left > 5)
+                        {
+                            // console.log('Slot number: '+i+' Amount: '+slots[left].childNodes.length);
+                            
+                            slotArr[i] = slots[left].childNodes.length;
+
+                            left--;
+                            i++;
+                        }
+                    }
+                    
+
+                    console.log('SEe if I got the tag: '+Id('lScore').innerHTML);
+                    
+
+                    await $.post('/backend/playMancala.php',{op:'update',slots:slotArr,luckyNum:window.localStorage.getItem('lab')}, function(data, status)
+                    {
+                            console.log(data);
+
+                            score();
+
+                    }); 
+                }
+
+                function score()
+                {
+                    var leftOrRight;
+                    var score;
+                    if(window.localStorage.getItem('jumpkey') == window.localStorage.getItem('playerOne'))
+                    {
+                        leftOrRight = 'right';
+                        score = Id('rScore').innerHTML;
+                    }
+                    else
+                    {
+                        leftOrRight = 'left';
+                        score = Id('lScore').innerHTML;
+                    }
+
+                    $.post('/backend/playMancala.php', {op:leftOrRight, luckyNum:window.localStorage.getItem('lab'), score:score},function(data, status){
+
+                        console.log(data);
+                    });
+                }
+
                 function startOver()
                 {
                     for(var s in AClass('slot'))
@@ -52,11 +119,84 @@ var gameBoard = (function()
 
                     init();
                 }
+
+                async function checkSlots()
+                {
+                   
+                       await $.post('/backend/playMancala.php',{op:'getSlots', luckyNum:window.localStorage.getItem('lab')}, function(data, status)
+                        {
+                            var json = JSON.parse(data);
+                            
+                            
+                            //console.log(json);
+    
+                            var slots = $('.slot');
+    
+                            var i = 0;
+                            var k = 0;
+
+                            for(var j in json)
+                            {
+                                k = 0;
+                                // while(right < 5)
+                                // {
+                                    
+                                //     slots[right].innerHTML = '';
+                                //     for(var k = 0; k < json[j]; k++)
+                                //     {
+                                //         if(json[j] != 0)
+                                //         {
+                                //             makeCircle(Id(right).cx.baseVal.value, Id(right).cy.baseVal.value, right);
+                                //         }
+                                //     }
+
+                                //     right++;
+                                // }
+
+                                // while(left > 6)
+                                // {
+                                //     slots[right].innerHTML = '';
+                                //     for(var k = 0; k < json[j]; k++)
+                                //     {
+                                //         if(json[j] != 0)
+                                //         {
+                                //             makeCircle(Id(left).cx.baseVal.value, Id(left).cy.baseVal.value, left);
+                                //         }
+                                //     }
+                                //     left--;
+                                // }
+
+                               slots[i].innerHTML = '';
+                                
+                                while(k < json[j])
+                                {
+                                    
+                                    makeCircle(Id(i).cx.baseVal.value, Id(i).cy.baseVal.value, i);
+                                    k++;
+                                }
+                                console.log(json[j]);
+                                i++;
+
+                            }
+
+                            checkScore();
+                        });
+                    
+                }
+
+                function checkScore()
+                {
+                    $.post('/backend/playMancala.php',{op:'checkScore',luckyNum:window.localStorage.getItem('lab')}, function(data, status){
+                        var json = JSON.parse(data);
+                        console.log(json);
+
+                        Id('lScore').innerHTML = json['lScore'];
+                        Id('rScore').innerHTML = json['rScore'];
+                    });
+                }
                 
                 function waitTurn()
                 {
-
-                    console.log('Checking turn from status: '+turn);
                     if(turn == 'first')
                     {
 
@@ -91,9 +231,6 @@ var gameBoard = (function()
                     setInterval(()=>{
                         $.post('/backend/playMancala.php',{op:'turnStatus', luckyNum:window.localStorage.getItem('lab')},function(data, status)
                         {
-                            
-                            console.log(window.localStorage.getItem('jumpkey') +' : '+window.localStorage.getItem('playerOne'));
-                            console.log(window.localStorage.getItem('jumpkey') + ' : '+window.localStorage.getItem('playerTwo'));
                             if(data == 'second')
                             {
                                 
@@ -112,6 +249,8 @@ var gameBoard = (function()
                                     enableControl(first);
                                 }
                             }
+                            
+                            checkSlots();
                         });
                     },1000);
                 }
@@ -122,20 +261,16 @@ var gameBoard = (function()
                     list.onclick = function click(e)
                     {
                         var flag = true;
-                        //console.log(e.path[0].id);
                        
                         let currentIndex = e.path[0].id;
-                        //console.log(currentIndex);
-                        // console.log('Selected: '+currentIndex);
+
                         var num = AClass('slot')[e.path[0].id].childNodes.length;
-                        //console.log(num);
+
                         
                         AClass('slot')[e.path[0].id].innerHTML = '';
 
                             for(var i = 1; i <= num; i++)
                             {   
-
-                                console.log(i+':'+num);
                                
                                if(currentIndex == 5)
                                {
@@ -151,7 +286,6 @@ var gameBoard = (function()
                                         console.log('Right Score: '+rightScore);
                                    }
 
-                                   //console.log('index: '+ i +' length: '+num);
                                    if(i != num)
                                    {
                                     makeCircle(Id(currentIndex).cx.baseVal.value, Id(currentIndex).cy.baseVal.value,currentIndex);
@@ -207,6 +341,7 @@ var gameBoard = (function()
                                 
                                 turn = waitTurn();
                                 console.log(turn);
+                                updateSlots();
                             }
                     }
                 }
@@ -215,9 +350,6 @@ var gameBoard = (function()
                 {
                     rightScore = 0;
                     leftScore = 0;
-                    
-
-                    console.log(first);
 
                     changeTurn('first');
 
@@ -260,6 +392,7 @@ var gameBoard = (function()
                     }
 
                     turnStatus();
+                    updateSlots();
                 }
 
                 function getDimensions() {
