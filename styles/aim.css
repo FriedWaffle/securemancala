@@ -30,33 +30,34 @@ body {
     border-radius: 50%;
   }
   
-  .container img.right {
-    float: right;
-    margin-left: 20px;
-    margin-right:0;
-  }
-  
-  .time-right {
-    float: right;
-    color: #aaa;
-  }
-  
-  .time-left {
-    float: left;
-    color: #999;
-  }
-  
-  .wrap{
+  .aimWrap{
       float:right;
       height:400px;
       width:400px;
-      width:fit-content;
       border: 8px;
       background: -webkit-linear-gradient(green, blue);
       border-color:transparent;
       border-style: solid;
       border-radius: 3px;
   }
+
+  .aimWrap > .aim{
+    flex-wrap: wrap;
+}
+
+  .aim > input{
+
+    margin:auto;
+    width:200px;
+}
+
+.aim > button{
+
+  background-color: green;
+  color: whitesmoke;
+  width: 70px;
+  border-radius: 8%;
+}
 
   #msg{
       height:370px;

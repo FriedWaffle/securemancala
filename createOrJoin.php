@@ -34,7 +34,7 @@
     {
         var makes = document.getElementById('makes');
 
-       await $.post('/backend/gameplays.php',{op:'search'},function(data, status){
+       await $.post('/backend/lobbies.php',{op:'search'},function(data, status){
             lobby = JSON.parse(data);
             console.log(...lobby);
 
@@ -56,7 +56,7 @@
 
     function joinLobby(x,y)
     {
-        $.post('/backend/gameplays.php',{luckyNum:x,jumpjack:y, role:'second', op:'join'}, function(data, status){
+        $.post('/backend/lobbies.php',{luckyNum:x,jumpjack:y, role:'second', op:'join'}, function(data, status){
             console.log(data);
 
             <?php $_SESSION['op'] = "join"; ?>

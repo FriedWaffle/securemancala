@@ -1,6 +1,6 @@
 function interactiveboard()
 {
-    return `<svg onload='gameBoard.init();' id='Layer_1' viewBox='0 0 4560 2560' width='60%'>
+    return `<div><svg onload='gameBoard.init();' id='Layer_1' viewBox='0 0 4560 2560' width='70%'>
  
  
     <path class='st0' d='M112.83,441.86l4327.82-9.64c32.9-0.07,59.64,26.54,59.71,59.44l3.26,1463.84
@@ -71,7 +71,15 @@ function interactiveboard()
     <text transform="matrix(1 0 0 1 0 221.8269)" class='st3 st5'>Player Two</text>
     <text transform="matrix(1 0 0 1 53.3799 2482.8799)" class='st3 st5'>Player One</text>
    
-    <g id='slotNumber'>
+    
+   </svg>
+   <div><h3 id="totalMarbles">Marbles: </h3>
+   <button class="button" onclick="gameBoard.startOver();">Start Over</button>
+   </div>
+   </div>`;
+}
+
+{/* <g id='slotNumber'>
         <text id='slot-0' transform="matrix(1 0 0 1 982.8441 388.4091)" class="st6">4</text>
         <text id='slot-1' transform="matrix(1 0 0 1 982.8439 2189.3088)" class="st6">4</text>
         <text id='slot-2' transform="matrix(1 0 0 1 1465.1901 2189.3091)" class="st6">4</text>
@@ -84,6 +92,4 @@ function interactiveboard()
         <text id='slot-9' transform="matrix(1 0 0 1 2516.0364 388.4093)" class="st6">4</text>
         <text id='slot-10' transform="matrix(1 0 0 1 3034.2678 388.4089)" class="st6">4</text>
         <text id='slot-11' transform="matrix(1 0 0 1 3543.479 388.4095)" class="st6">4</text>
-    </g>
-   </svg>`;
-}
+    </g> */}

@@ -7,10 +7,10 @@ label{
     background-color: navy;
     color:white;
     margin-top: 5%;
-    opacity: .6;
+    opacity: .8;
     border-radius: 12%;
-    width:75px;
-    height:35px;
+    width:78px;
+    height:38px;
     transition: width .1s;
 }
 
@@ -60,9 +60,7 @@ label{
 }
 
 
-.aim{
-    flex-wrap: wrap;
-}
+
 
 .theForm > .message{
     background-color: #CCCCCC;
@@ -86,13 +84,7 @@ span{
     border-radius: 6%;
 }
 
-.aim > button{
 
-    background-color: green;
-    color: whitesmoke;
-    width: 70px;
-    border-radius: 8%;
-}
 
 .selection{
     background-color: whitesmoke;
@@ -103,19 +95,7 @@ span{
     cursor: pointer;
 }
 
-.aim > input{
 
-    margin:auto;
-    width:200px;
-}
-
-.theForm > .aim{
-
-}
-
-body{
-    background-color: #F5F5F5;
-}
 
 .title
 {

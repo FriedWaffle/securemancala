@@ -77,7 +77,7 @@ class Lobby extends DB
     {
         try
         {
-            $stmt = $this->conn->prepare("select lobbyplayer.player_id as 'playerId', lobbyplayer.role as 'roles', player.username as 'user' from lobbyplayer join player on lobbyplayer.player_id = player.id where lobby_id = :lobbyId");
+            $stmt = $this->conn->prepare("select lobbyplayer.player_id as 'playerId', lobbyplayer.role as 'roles', player.username as 'user', lobbyplayer.ready as 'ready', lobby.gostatus as 'go' from lobbyplayer join player on lobbyplayer.player_id = player.id join lobby on lobbyplayer.lobby_id = lobby.id where lobby_id = :lobbyId");
             $stmt->bindParam(':lobbyId',$lobby_id);
             $stmt->execute();
 
@@ -86,7 +86,7 @@ class Lobby extends DB
 
             while($row = $stmt->fetch())
             {
-                $arr[$i] = array('player_id' => $row['playerId'], 'role' => $row['roles'], 'username' => $row['user']);
+                $arr[$i] = array('player_id' => $row['playerId'], 'role' => $row['roles'], 'username' => $row['user'], 'ready' => $row['ready'], 'go' => $row['go']);
 
                 $i++;
             }

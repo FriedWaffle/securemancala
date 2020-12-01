@@ -39,7 +39,8 @@ var gameBoard = (function()
                 {
                     for(var s in $$$('slot'))
                     {
-                        console.log($$$('slot')[s].innerHTML='');
+                        $$$('slot')[s].innerHTML='';
+                       // console.log();
                     }
 
                     enableControl($('first').getElementsByClassName('st2'));
@@ -75,6 +76,7 @@ var gameBoard = (function()
                     list.onmouseover = function(e){
                         console.log('ID: '+e.path[0].id);
                         console.log('Num of marbles: '+$$$('slot')[e.path[0].id].childNodes.length);
+                        $('totalMarbles').innerHTML = 'Marbles: '+$$$('slot')[e.path[0].id].childNodes.length;
                     }
                 }
                 
@@ -87,10 +89,10 @@ var gameBoard = (function()
                         //console.log(e.path[0].id);
                        
                         let currentIndex = e.path[0].id;
-                        console.log(currentIndex);
+                        //console.log(currentIndex);
                         // console.log('Selected: '+currentIndex);
                         var num = $$$('slot')[e.path[0].id].childNodes.length;
-                        console.log(num);
+                        //console.log(num);
                         
                         $$$('slot')[e.path[0].id].innerHTML = '';
 
@@ -113,7 +115,7 @@ var gameBoard = (function()
                                         console.log('Right Score: '+rightScore);
                                    }
 
-                                   console.log('index: '+ i +' length: '+num);
+                                   //console.log('index: '+ i +' length: '+num);
                                    if(i != num)
                                    {
                                     makeCircle($(currentIndex).cx.baseVal.value, $(currentIndex).cy.baseVal.value,currentIndex);
@@ -174,11 +176,7 @@ var gameBoard = (function()
                                 console.log(turn);
                             }
 
-                            // console.log('Number left: '+$$$('slot')[e.path[0].id].childNodes.length);
-
-                            console.log($('slotNumber').getElementsByClassName('st6').length);
-
-                            displaySlot($('slotNumber').getElementsByClassName('st6'),$$$('slot'),e.path[0].id);
+                            //console.log($('slotNumber').getElementsByClassName('st6').length);
                     }
                 }
                 
@@ -186,6 +184,7 @@ var gameBoard = (function()
                 {
                     rightScore = 0;
                     leftScore = 0;
+                    turn = 'first';
                     disableControl($('second').getElementsByClassName('st2'));
                     
                     $('lScore').innerHTML = 0;
@@ -197,10 +196,10 @@ var gameBoard = (function()
                     {
                         var indexed = getClasses[k];
                         var slotted = $$$('st2')[k];
-                        //console.log(indexed.cy.baseVal.value);
+                        
                         for(var v = 0; v < 4; v++)
                         {
-                            //console.log('checking here');
+
                             makeCircle(indexed.cx.baseVal.value,indexed.cy.baseVal.value, k);
                         }
 
