@@ -4,6 +4,9 @@ var gameBoard = (function()
                 var rightScore = 0;
                 var turn = 'first';
 
+
+                
+
                 function $(id) {
                     return document.getElementById(id);
                 }
@@ -185,6 +188,12 @@ var gameBoard = (function()
                     rightScore = 0;
                     leftScore = 0;
                     turn = 'first';
+                    console.log(window.localStorage.getItem('jumpkey'));
+                    if(window.localStorage.getItem('jumpkey') != null)
+                    {
+                        createMancala(window.localStorage.getItem('jumpkey'));
+                    }
+                    
                     disableControl($('second').getElementsByClassName('st2'));
                     
                     $('lScore').innerHTML = 0;

@@ -11,13 +11,15 @@
 
 <html>
 <head>
-<link rel="stylesheet" href="styles/style.css">
+<link rel="stylesheet" href="/styles/style.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="/scripts/createOrJoin.js"></script>
 </head>
 <body id="makes">
 <script>
     // allUser("<?php echo $_SESSION['jumpkey'];?>");
+
+    
 
     function setup()
     {

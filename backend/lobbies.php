@@ -1,6 +1,5 @@
 <?php
 
-    clearstatcache();
     include_once('../classes/Lobby.class.php');
 
     $Lobby = new Lobby();

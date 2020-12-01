@@ -18,8 +18,3 @@ function enableControl(x)
         i++;
     }
 }
-
-function createMancala()
-{
-    $.post('/backend/')
-}

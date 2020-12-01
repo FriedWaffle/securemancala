@@ -16,7 +16,7 @@
 
                 if(isset($_SESSION['icecream']))
                 {
-                  header("Location: createOrJoin.php");
+                  header("Location: views/createOrJoin.php");
                 }
             }
         }
@@ -25,9 +25,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="styles/style.css" rel="stylesheet">
+<link href="/styles/style.css" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script type="text/javascript" src="scripts/register.js"></script>
+<script type="text/javascript" src="/scripts/register.js"></script>
 </head>
 <body>
   <h1 class="title">Mancala</h1>

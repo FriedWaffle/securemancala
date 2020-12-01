@@ -40,14 +40,8 @@
             {
                 $this->conn->rollBack();
                 echo $e->getMessage();
-                
+
             }
         }
-    }
-
-
-    function gameStatus()
-    {
-        
     }
 ?>
