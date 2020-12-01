@@ -7,10 +7,13 @@
     switch($_POST['op'])
     {
         case 'create':
-            $Mancala->create_mancala($_POST['jumpkey']);
+            $Mancala->create_mancala($_POST['jumpjack']);
         break;
         case 'turn':
-            echo "sweet";
+            $Mancala->turn($_POST['spinbottle'], $_POST['luckyNum']);
+        break;
+        case 'turnStatus':
+            $Mancala->turnStatus($_POST['luckyNum']);
         break;
     }
 ?>

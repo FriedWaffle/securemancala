@@ -68,8 +68,8 @@ function interactiveboard()
     <rect x='4005.44' y='1018.04' class='rect' width='276.56' height='411.96'/>
     <text transform='matrix(1 0 0 1 3925.4448 1373.0327)' id='rScore' class='st3 st4'>0</text>
     <rect x='1465.19' y='136' class='rect' width='1884.12' height='434.58'/>
-    <text transform="matrix(1 0 0 1 0 221.8269)" class='st3 st5'>Player Two</text>
-    <text transform="matrix(1 0 0 1 53.3799 2482.8799)" class='st3 st5'>Player One</text>
+    <text id="pyTwo" transform="matrix(1 0 0 1 0 221.8269)" class='st3 st5'>Player Two</text>
+    <text id="pyOne" transform="matrix(1 0 0 1 53.3799 2482.8799)" class='st3 st5'>Player One</text>
    
     
    </svg>

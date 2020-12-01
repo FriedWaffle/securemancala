@@ -9,8 +9,9 @@ function createMancala(x)
 
 function changeTurn(x)
 {
-    $.post('/backend/playMancala.php',{op:'turn',spinbottle:x}, function(data, status)
+    $.post('/backend/playMancala.php',{op:'turn',spinbottle:x, luckyNum:window.localStorage.getItem('lab')}, function(data, status)
     {
-        console.log(data);        
+        console.log(data);      
     });
 }
+
